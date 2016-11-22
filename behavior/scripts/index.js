@@ -1,5 +1,15 @@
 'use strict'
 
+const firstOfEntityRole = function(message, entity, role) {
+  role = role || 'generic';
+
+  const slots = message.slots
+  const entityValues = message.slots[entity]
+  const valsForRole = entityValues ? entityValues.values_by_role[role] : null
+
+  return valsForRole ? valsForRole[0] : null
+}
+
 exports.handle = (client) => {
   // Create steps
   const sayHello = client.createStep({
