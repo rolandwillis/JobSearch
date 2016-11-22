@@ -50,11 +50,11 @@ const collectCity = client.createStep({
 
   extractInfo() {
 
-	const jobRole = firstOfEntityRole(client.getMessagePart(), 'JobRole') 
+	let jobRole = firstOfEntityRole(client.getMessagePart(), 'jobrole') 
 
 	  if (jobRole) {
       client.updateConversationState({
-        JobRole: jobRole
+        jobrole: jobRole
       })
 
     console.log('User wants to search for the job role :', jobRole.value)
@@ -71,7 +71,9 @@ const collectCity = client.createStep({
   },
 
   prompt() {
-    client.addResponse('app:response:name:prompt/specify_city')
+    client.addResponse('app:response:name:prompt/specify_city', {
+        jobrole: client.getConversationState().jobrole,
+      })
     client.done()
   },
 })
