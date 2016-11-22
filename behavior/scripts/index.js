@@ -75,7 +75,7 @@ const sayHello = client.createStep({
     },
 
     prompt() {
-      client.addResponse('prompt/need_help')
+      client.addResponse('prompt/specify_jobtype')
      
       client.updateConversationState({
         helloSent: true

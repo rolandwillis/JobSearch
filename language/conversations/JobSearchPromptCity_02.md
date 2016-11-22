@@ -7,7 +7,7 @@ Hi
 * greeting
 
 < Hi, what type of job are you looking for?
-* prompt/need_help
+* prompt/specify_jobtype
 
 I am looking for [engineering](jobrole) jobs.
 * information_request/available_jobs
