@@ -33,6 +33,29 @@ exports.handle = (client) => {
     }
   })
 
+const collectCity = client.createStep({
+  satisfied() {
+    return Boolean(client.getConversationState().specifyCity)
+  },
+
+  prompt() {
+    // Need to prompt user for city    
+    console.log('Need to ask user for city')
+    client.done()
+  },
+})
+
+const provideJobSearchLink = client.createStep({
+  satisfied() {
+    return false
+  },
+
+  prompt() {
+    // Need to provide job search link
+    client.done()
+  },
+})
+
   client.runFlow({
     classifications: {
       // map inbound message classifications to names of streams
@@ -41,9 +64,10 @@ exports.handle = (client) => {
       // configure responses to be automatically sent as predicted by the machine learning model
     },
     streams: {
-      main: 'onboarding',
+      main: 'getJobSearch',
       onboarding: [sayHello],
       end: [untrained],
+	  getJobSearch:[collectCity,provideJobSearchLink]
     },
   })
 }
