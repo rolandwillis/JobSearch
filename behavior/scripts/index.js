@@ -35,12 +35,23 @@ exports.handle = (client) => {
 
 const collectCity = client.createStep({
   satisfied() {
-    return Boolean(client.getConversationState().specifyCity)
+    return Boolean(client.getConversationState().jobSearchCity)
+  },
+
+  extractInfo() {
+    const city = firstOfEntityRole(client.getMessagePart(), 'city')
+
+    if (city) {
+      client.updateConversationState({
+        jobSearchCity: city,
+      })
+
+      console.log('User wants the job search in:', city.value)
+    }
   },
 
   prompt() {
-    // Need to prompt user for city    
-    console.log('Need to ask user for city')
+    client.addResponse('app:response:name:prompt/specify_city')
     client.done()
   },
 })
