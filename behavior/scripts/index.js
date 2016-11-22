@@ -99,12 +99,13 @@ const provideJobSearchLink = client.createStep({
 ,
   prompt() {
     // Need to provide job search link
- client.addResponse('app:response:name:information_response/available_jobs', {
+let jobLinkMessage = {
         jobrole: client.getConversationState().jobrole,
 		jobboardlink: "<a href='google.co.uk'>here</a>",
 		jobcount:3,
 		city:client.getConversationState().city
-      })
+      };
+ client.addResponse('app:response:name:information_response/available_jobs', jobLinkMessage)
     client.done()
   },
 })

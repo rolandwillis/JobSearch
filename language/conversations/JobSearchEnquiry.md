@@ -9,7 +9,7 @@ Do you have any [Engineering](jobrole) jobs?
 < What city would you like me to look for [Engineering](jobrole) jobs in?
 * prompt/specify_city
 
-err any jobs around [London](city)?
+[London](city)?
 * response/specify_city
 
 I have found [4](jobcount) [Engineering](jobrole) jobs around [London](city) that may be of interest to you. Have a look at this [link](jobboardlink).
