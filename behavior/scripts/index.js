@@ -83,21 +83,7 @@ const provideJobSearchLink = client.createStep({
   satisfied() {
    return false;
   },
-	extractInfo(){
-   // const jobboardlink = "<a href='google.co.uk'>here</a>"
-
-
-  /*  if (jobboardlink) {
-      client.updateConversationState({
-        jobboardlink: jobboardlink
-      })
-
-      //console.log('User wants the job search in:', city.value)
-    } 
-  */
-}
-,
-  prompt() {
+	  prompt() {
     // Need to provide job search link
 let jobLinkMessage = {
         jobrole: client.getConversationState().jobrole.value,
@@ -119,8 +105,6 @@ let jobLinkMessage = {
     },
     streams: {
       main: 'getJobSearch',
-      hi: [sayHello],
-      end: [untrained],
 	  getJobSearch:[collectCity,provideJobSearchLink]
     },
   })
