@@ -19,11 +19,11 @@ exports.handle = (client) => {
 
     prompt() {
       client.addResponse('welcome')
-      client.addResponse('provide/documentation', {
+     /* client.addResponse('provide/documentation', {
         documentation_link: 'http://docs.init.ai',
       })
       client.addResponse('provide/instructions')
-
+	*/
       client.updateConversationState({
         helloSent: true
       })
@@ -49,7 +49,17 @@ const collectCity = client.createStep({
   },
 
   extractInfo() {
-    const city = firstOfEntityRole(client.getMessagePart(), 'city')
+
+	const jobRole = firstOfEntityRole(client.getMessagePart(), 'JobRole') ?? "Anywhere";
+
+	  if (jobRole) {
+      client.updateConversationState({
+        JobRole: jobRole
+      })
+
+    console.log('User wants to search for the job role :', jobRole.value)
+
+    const city = firstOfEntityRole(client.getMessagePart(), 'city');
 
     if (city) {
       client.updateConversationState({
@@ -85,8 +95,8 @@ const provideJobSearchLink = client.createStep({
       // configure responses to be automatically sent as predicted by the machine learning model
     },
     streams: {
-      main: 'getJobSearch',
-      onboarding: [sayHello],
+      main: 'hi',
+      hi: [sayHello],
       end: [untrained],
 	  getJobSearch:[collectCity,provideJobSearchLink]
     },
