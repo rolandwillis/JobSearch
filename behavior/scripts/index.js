@@ -12,40 +12,11 @@ const firstOfEntityRole = function(message, entity, role) {
 
 exports.handle = (client) => {
   // Create steps
-  const sayHello = client.createStep({
-    satisfied() {
-      return Boolean(client.getConversationState().helloSent)
-    },
-
-    prompt() {
-      client.addResponse('welcome')
-     /* client.addResponse('provide/documentation', {
-        documentation_link: 'http://docs.init.ai',
-      })
-      client.addResponse('provide/instructions')
-	*/
-      client.updateConversationState({
-        helloSent: true
-      })
-
-      client.done()
-    }
-  })
-
-  const untrained = client.createStep({
-    satisfied() {
-      return false
-    },
-
-    prompt() {
-      client.addResponse('apology/untrained')
-      client.done()
-    }
-  })
+ 
 
 const collectCity = client.createStep({
   satisfied() {
-    return Boolean(client.getConversationState().city)
+    return Boolean(client.getConversationState().jobCity)
   },
 
   extractInfo() {
@@ -54,7 +25,7 @@ const collectCity = client.createStep({
 
 	  if (jobrole) {
       client.updateConversationState({
-        jobrole: jobrole
+        jobRole: jobrole
       })
     console.log('User wants to search for the job role :', jobrole.value)
 	}
@@ -64,7 +35,7 @@ const collectCity = client.createStep({
 
     if (city) {
       client.updateConversationState({
-        city: city
+        jobCity: city
       })
 
       console.log('User wants the job search in:', city.value)
@@ -72,9 +43,11 @@ const collectCity = client.createStep({
   },
 
   prompt() {
-    client.addResponse('app:response:name:prompt/specify_city', {
+
+	let jobRole = {
         jobrole: client.getConversationState().jobrole.value
-      })
+      }
+    client.addResponse('app:response:name:prompt/specify_city', jobRole)
     client.done()
   },
 })
@@ -86,14 +59,14 @@ const provideJobSearchLink = client.createStep({
 	  prompt() {
     // Need to provide job search link
 let jobLinkMessage = {
-        jobrole: client.getConversationState().jobrole.value,
+        jobrole: client.getConversationState().jobRole.value,
 		jobboardlink: "<a href='google.co.uk'>here</a>",
 		jobcount:3,
-		city:client.getConversationState().city.value
-      };
+		city:client.getConversationState().jobCity.value,
+      }
  client.addResponse('app:response:name:information_response/available_jobs', jobLinkMessage)
     client.done()
-  },
+  }
 })
 
   client.runFlow({
@@ -105,7 +78,7 @@ let jobLinkMessage = {
     },
     streams: {
       main: 'getJobSearch',
-	  getJobSearch:[collectCity,provideJobSearchLink]
+	  getJobSearch:[collectCity,provideJobSearchLink],
     },
   })
 }
