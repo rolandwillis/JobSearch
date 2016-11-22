@@ -54,7 +54,7 @@ const collectCity = client.createStep({
 
 	  if (jobrole) {
       client.updateConversationState({
-        jobrole: jobRole.value
+        jobrole: jobrole.value
       })
     console.log('User wants to search for the job role :', jobRole.value)
 	}
