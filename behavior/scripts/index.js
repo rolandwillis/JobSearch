@@ -84,23 +84,24 @@ const provideJobSearchLink = client.createStep({
    return false;
   },
 	extractInfo(){
-    const jobboardlink = "<a href='google.co.uk'>here</a>"
+   // const jobboardlink = "<a href='google.co.uk'>here</a>"
 
 
-    if (jobboardlink) {
+  /*  if (jobboardlink) {
       client.updateConversationState({
         jobboardlink: jobboardlink
       })
 
       //console.log('User wants the job search in:', city.value)
-    }
+    } 
+  */
 }
 ,
   prompt() {
     // Need to provide job search link
  client.addResponse('app:response:name:information_response/available_jobs', {
         jobrole: client.getConversationState().jobrole,
-		jobboardlink: client.getConversationState().jobboardlink,
+		jobboardlink: "<a href='google.co.uk'>here</a>",
 		jobcount:3,
 		city:client.getConversationState().city
       })
