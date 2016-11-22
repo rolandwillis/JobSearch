@@ -54,7 +54,7 @@ const collectCity = client.createStep({
 
 	  if (jobrole) {
       client.updateConversationState({
-        jobrole: jobrole.value
+        jobrole: jobrole
       })
     console.log('User wants to search for the job role :', jobrole.value)
 	}
@@ -64,7 +64,7 @@ const collectCity = client.createStep({
 
     if (city) {
       client.updateConversationState({
-        city: city.value
+        city: city
       })
 
       console.log('User wants the job search in:', city.value)
@@ -73,7 +73,7 @@ const collectCity = client.createStep({
 
   prompt() {
     client.addResponse('app:response:name:prompt/specify_city', {
-        jobrole: client.getConversationState().jobrole
+        jobrole: client.getConversationState().jobrole.value
       })
     client.done()
   },
@@ -100,10 +100,10 @@ const provideJobSearchLink = client.createStep({
   prompt() {
     // Need to provide job search link
 let jobLinkMessage = {
-        jobrole: client.getConversationState().jobrole,
+        jobrole: client.getConversationState().jobrole.value,
 		jobboardlink: "<a href='google.co.uk'>here</a>",
 		jobcount:3,
-		city:client.getConversationState().city
+		city:client.getConversationState().city.value
       };
  client.addResponse('app:response:name:information_response/available_jobs', jobLinkMessage)
     client.done()
