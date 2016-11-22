@@ -47,7 +47,7 @@ const collectCity = client.createStep({
 	let jobrole = {
         jobrole: client.getConversationState().jobRole.value
       }
-    client.addResponse('app:response:name:prompt/specify_city', jobrole)
+    client.addResponse('prompt/specify_city', jobrole)
     client.done()
   }
 })
