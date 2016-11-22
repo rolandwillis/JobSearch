@@ -87,7 +87,7 @@ const provideJobSearchLink = client.createStep({
     const jobSearchLink = "<a href='google.co.uk'>here</a>"
 
 
-    if (city) {
+    if (jobSearchLink) {
       client.updateConversationState({
         jobSearchLink: jobSearchLink
       })
