@@ -89,7 +89,7 @@ const sayHello = client.createStep({
       // configure responses to be automatically sent as predicted by the machine learning model
     },
     streams: {
-      main: 'getJobSearch',
+      main: 'hi',
 	  hi:[sayHello],
 	  getJobSearch:[collectCity,provideJobSearchLink],
     },
