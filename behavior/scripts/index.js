@@ -45,7 +45,7 @@ exports.handle = (client) => {
 
 const collectCity = client.createStep({
   satisfied() {
-    return Boolean(client.getConversationState().jobSearchCity)
+    return Boolean(client.getConversationState().city)
   },
 
   extractInfo() {
@@ -64,7 +64,7 @@ const collectCity = client.createStep({
 
     if (city) {
       client.updateConversationState({
-        jobSearchCity: city
+        city: city
       })
 
       console.log('User wants the job search in:', city.value)
@@ -81,15 +81,15 @@ const collectCity = client.createStep({
 
 const provideJobSearchLink = client.createStep({
   satisfied() {
-   return Boolean(client.getConversationState().jobSearchResults)
+   return false;
   },
 	extractInfo(){
-    const jobSearchLink = "<a href='google.co.uk'>here</a>"
+    const jobboardlink = "<a href='google.co.uk'>here</a>"
 
 
     if (jobSearchLink) {
       client.updateConversationState({
-        jobSearchLink: jobSearchLink
+        jobboardlink: jobboardlink
       })
 
       //console.log('User wants the job search in:', city.value)
@@ -100,7 +100,9 @@ const provideJobSearchLink = client.createStep({
     // Need to provide job search link
  client.addResponse('app:response:name:information_response/available_jobs', {
         jobrole: client.getConversationState().jobrole,
-		jobSearchLink: client.getConversationState().jobSearchLink
+		jobboardlink: client.getConversationState().jobboardlink,
+		jobcount:3,
+		city:client.getConversationState().city
       })
     client.done()
   },
