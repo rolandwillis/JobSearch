@@ -49,7 +49,7 @@ const collectCity = client.createStep({
       }
     client.addResponse('app:response:name:prompt/specify_city', jobrole)
     client.done()
-  },
+  }
 })
 
 const provideJobSearchLink = client.createStep({
@@ -90,7 +90,7 @@ const sayHello = client.createStep({
     },
     streams: {
       main: 'getJobSearch',
-	  hi:[sayHello]
+	  hi:[sayHello],
 	  getJobSearch:[collectCity,provideJobSearchLink],
     },
   })
