@@ -69,6 +69,18 @@ let jobLinkMessage = {
   }
 })
 
+const sayHello = client.createStep({
+  satisfied() {
+   return false;
+  },
+	  prompt() {
+    // Ask user if they need help
+
+ client.addResponse('app:response:name:prompt/need_help')
+    client.done()
+  }
+})
+
   client.runFlow({
     classifications: {
       // map inbound message classifications to names of streams
@@ -78,6 +90,7 @@ let jobLinkMessage = {
     },
     streams: {
       main: 'getJobSearch',
+	  hi:[sayHello]
 	  getJobSearch:[collectCity,provideJobSearchLink],
     },
   })
