@@ -50,6 +50,15 @@ const collectCity = client.createStep({
 
   extractInfo() {
 
+	const jobRole = firstOfEntityRole(client.getMessagePart(), 'jobrole') 
+
+	  if (jobRole) {
+      client.updateConversationState({
+        jobrole: jobRole
+      })
+    console.log('User wants to search for the job role :', jobRole.value)
+	}
+
 
     const city = firstOfEntityRole(client.getMessagePart(), 'city')
 
@@ -89,7 +98,7 @@ const provideJobSearchLink = client.createStep({
       // configure responses to be automatically sent as predicted by the machine learning model
     },
     streams: {
-      main: 'hi',
+      main: 'getJobSearch',
       hi: [sayHello],
       end: [untrained],
 	  getJobSearch:[collectCity,provideJobSearchLink]
