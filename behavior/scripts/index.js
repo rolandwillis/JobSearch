@@ -61,7 +61,7 @@ const provideJobSearchLink = client.createStep({
 let jobLinkMessage = {
         jobrole: client.getConversationState().jobRole.value,
 		jobboardlink: "<a href='google.co.uk'>here</a>",
-		jobcount:3,
+		jobcount:"3",
 		city:client.getConversationState().jobCity.value,
       }
  client.addResponse('app:response:name:information_response/available_jobs', jobLinkMessage)
