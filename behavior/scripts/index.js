@@ -64,20 +64,23 @@ let jobLinkMessage = {
 		jobcount:"3",
 		city:client.getConversationState().jobCity.value,
       }
- client.addResponse('app:response:name:information_response/available_jobs', jobLinkMessage)
+ client.addResponse('information_response/available_jobs', jobLinkMessage)
     client.done()
   }
 })
 
 const sayHello = client.createStep({
   satisfied() {
-   return false;
-  },
-	  prompt() {
-    // Ask user if they need help
+      return Boolean(client.getConversationState().helloSent)
+    },
 
- client.addResponse('app:response:name:prompt/need_help')
-    client.done()
+    prompt() {
+      client.addResponse('prompt/need_help')
+     
+      client.updateConversationState({
+        helloSent: true
+      })
+      client.done()
   }
 })
 
