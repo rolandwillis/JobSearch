@@ -130,6 +130,12 @@ const sayGoodbye = client.createStep({
 
     prompt() {
       client.addResponse('thanks')
+// Reset all satisfied conditions
+ client.updateConversationState({
+        jobLinkSent: false,
+		jobRole:null,
+		jobCity:null
+      })
       client.done()
   }
 })
