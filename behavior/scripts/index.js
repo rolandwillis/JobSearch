@@ -100,7 +100,8 @@ const sayGoodbye = client.createStep({
     classifications: {
       // map inbound message classifications to names of streams
       'greeting':'hi',
-   	  'information_request/available_jobs': 'getJobSearch',
+   	  'information_request/available_jobs': 'getCity',
+	  'information_response/available_jobs':'getJobSearchLink'
     },
     autoResponses: {
       // configure responses to be automatically sent as predicted by the machine learning model
@@ -108,7 +109,8 @@ const sayGoodbye = client.createStep({
     streams: {
       main: 'hi',
 	  hi:[sayHello],
-	  getJobSearch:[collectCity,provideJobSearchLink],
+	  getCity:[collectCity],
+	  getJobSearchLink:[provideJobSearchLink],
 	  end:[sayGoodbye]
     },
   })
