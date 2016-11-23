@@ -13,6 +13,30 @@ const firstOfEntityRole = function(message, entity, role) {
 exports.handle = (client) => {
   // Create steps
  
+const establishJobType = client.createStep({
+  satisfied() {
+      return Boolean(client.getConversationState().jobRole)
+    },
+	extractInfo(){
+
+ const jobrole = firstOfEntityRole(client.getMessagePart(), 'jobrole')
+	if(jobrole)    
+	{  
+	if(jobrole.value=="anything"){
+		jobrole.value = "any"
+	}
+	client.updateConversationState({
+		    jobRole: jobrole
+		  })
+	  console.log('User specifies interest in jobs of role type:', jobrole.value)
+	}
+},
+    prompt() {
+      client.addResponse('prompt/specify_jobtype')
+    
+      client.done()
+  }
+})
 
 const collectCity = client.createStep({
   satisfied() {
@@ -54,34 +78,6 @@ const collectCity = client.createStep({
   }
 })
 
-const collectJobRole = client.createStep({
-  satisfied() {
-    return Boolean(client.getConversationState().jobRole)
-  },
-
-  extractInfo() {
-	console.log('trying to get information about the job role inside collectCity.')
-	const jobrole = firstOfEntityRole(client.getMessagePart(), 'jobrole') 
-
-	  if (jobrole) {
-      client.updateConversationState({
-        jobRole: jobrole,
-		byeSent:false
-      })
-    console.log('User wants to search for the job role inside collectCity :', jobrole.value)
-	}
-
-  },
-
-  prompt() {
-
-	let jobrole = {
-        jobrole: client.getConversationState().jobRole.value
-      }
-    client.addResponse('prompt/specify_city', jobrole)
-    client.done()
-  }
-})
 
 const provideJobSearchLink = client.createStep({
   satisfied() {
@@ -91,7 +87,7 @@ const provideJobSearchLink = client.createStep({
 	  prompt() {
     // Need to provide job search link
 let jobLinkMessage = {
-        jobrole: client.getConversationState().jobRole.value,
+        jobrole: client.getConversationState().jobRole.value=="any"?"":client.getConversationState().jobRole.value,
 		jobboardlink: "http://google.co.uk",
 		jobcount:"3",
 		city:client.getConversationState().jobCity.value
@@ -104,27 +100,7 @@ let jobLinkMessage = {
   }
 })
 
-const establishJobType = client.createStep({
-  satisfied() {
-      return Boolean(client.getConversationState().jobRole)
-    },
-	extractInfo(){
 
- const jobrole = firstOfEntityRole(client.getMessagePart(), 'jobrole')
-	if(jobrole)    
-	{  
-	client.updateConversationState({
-		    jobRole: jobrole
-		  })
-	  console.log('User specifies interest in jobs of role type:', jobrole.value)
-	}
-},
-    prompt() {
-      client.addResponse('prompt/specify_jobtype')
-    
-      client.done()
-  }
-})
 
 const sayGoodbye = client.createStep({
   satisfied() {
