@@ -18,8 +18,5 @@ sure I live in [London](city)
 thanks
 * thanks
 
-bye
-* goodbye
-
-< Bye for now :)
+< No problem. Bye for now :)
 * thanks

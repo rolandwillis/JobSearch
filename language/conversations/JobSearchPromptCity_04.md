@@ -25,4 +25,4 @@ No
 * decline/thanks
 
 < OK. Goodbye.
-* finish/goodbye
+* thanks

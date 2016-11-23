@@ -25,4 +25,4 @@ thanks
 * thanks
 
 < no problem. good luck
-* finish/goodbye
+* thanks
