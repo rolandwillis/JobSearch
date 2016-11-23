@@ -130,7 +130,7 @@ const establishJobType = client.createStep({
 
 const sayGoodbye = client.createStep({
   satisfied() {
-    return Boolean(client.getConversationState().byeSent)
+    return false;
     },
 
     prompt() {
@@ -160,7 +160,7 @@ const sayGoodbye = client.createStep({
     },
     streams: {
       main: 'hi',
-	  hi:[establishJobType,collectCity,provideJobSearchLink],
+	  hi:[establishJobType,collectCity,provideJobSearchLink,sayGoodbye],
 	  end:[sayGoodbye]
     },
   })
