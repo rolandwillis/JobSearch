@@ -87,8 +87,8 @@ const sayHello = client.createStep({
   client.runFlow({
     classifications: {
       // map inbound message classifications to names of streams
-      hi: 'greeting'
-   	  getJobSearch: 'information_request/available_jobs',
+      'greeting':'hi',
+   	  'information_request/available_jobs': 'getJobSearch',
     },
     autoResponses: {
       // configure responses to be automatically sent as predicted by the machine learning model
