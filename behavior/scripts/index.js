@@ -21,7 +21,7 @@ const collectCity = client.createStep({
 
   extractInfo() {
 	console.log('trying to get information about the job role inside collectCity.')
-	const jobrole = firstOfEntityRole(client.getMessagePart(), 'jobrole') 
+	const jobrole = client.getConversationState().jobRole
 
 	  if (jobrole) {
       client.updateConversationState({
@@ -40,6 +40,34 @@ const collectCity = client.createStep({
 
      console.log('User wants to search for the job role ' + jobrole.value + ' near the city :', city.value)
     }
+  },
+
+  prompt() {
+
+	let jobrole = {
+        jobrole: client.getConversationState().jobRole.value
+      }
+    client.addResponse('prompt/specify_city', jobrole)
+    client.done()
+  }
+})
+
+const collectJobRole = client.createStep({
+  satisfied() {
+    return Boolean(client.getConversationState().jobRole)
+  },
+
+  extractInfo() {
+	console.log('trying to get information about the job role inside collectCity.')
+	const jobrole = firstOfEntityRole(client.getMessagePart(), 'jobrole') 
+
+	  if (jobrole) {
+      client.updateConversationState({
+        jobRole: jobrole
+      })
+    console.log('User wants to search for the job role inside collectCity :', jobrole.value)
+	}
+
   },
 
   prompt() {
@@ -120,7 +148,7 @@ const sayGoodbye = client.createStep({
     },
     streams: {
       main: 'hi',
-	  hi:[establishJobType,collectCity,provideJobSearchLink],
+	  hi:[establishJobType,collectJobRole,collectCity,provideJobSearchLink],
 	  end:[sayGoodbye]
     },
   })
