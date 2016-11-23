@@ -54,17 +54,21 @@ const collectCity = client.createStep({
 
 const provideJobSearchLink = client.createStep({
   satisfied() {
-   return false;
+
+    return Boolean(client.getConversationState().jobLinkSent)
   },
 	  prompt() {
     // Need to provide job search link
 let jobLinkMessage = {
         jobrole: client.getConversationState().jobRole.value,
-		jobboardlink: "<a href='google.co.uk'>here</a>",
+		jobboardlink: "blah",
 		jobcount:"3",
 		city:client.getConversationState().jobCity.value,
       }
  client.addResponse('information_response/available_jobs', jobLinkMessage)
+   client.updateConversationState({
+        jobLinkSent: true
+      })
     client.done()
   }
 })
