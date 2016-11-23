@@ -20,3 +20,6 @@ I am based in [Liverpool](city)
 
 < Thanks. I have found [8](jobcount) [c# senior development](jobrole) roles near [Liverpool](city). Click [here](jobboardlink) to have a look.
 * information_response/available_jobs
+
+Goodbye
+* thanks
