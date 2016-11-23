@@ -55,7 +55,7 @@ const collectCity = client.createStep({
 const provideJobSearchLink = client.createStep({
   satisfied() {
 
-    return false;
+     return Boolean(client.getConversationState().jobLinkSent)
   },
 	  prompt() {
     // Need to provide job search link
