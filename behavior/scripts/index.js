@@ -80,7 +80,8 @@ const establishJobType = client.createStep({
 	extractInfo(){
 
  const jobtype = firstOfEntityRole(client.getMessagePart(), 'jobtype')
-if(jobtype)      
+if(jobtype)    
+{  
 client.updateConversationState({
         jobType: jobtype
       })
@@ -119,7 +120,7 @@ const sayGoodbye = client.createStep({
     },
     streams: {
       main: 'hi',
-	  hi:[sayHello,collectCity,provideJobSearchLink],
+	  hi:[establishJobType,collectCity,provideJobSearchLink],
 	  end:[sayGoodbye]
     },
   })
