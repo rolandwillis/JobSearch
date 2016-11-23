@@ -6,7 +6,7 @@ timestamp: 2016-11-22T20:26:06.277712545Z
 are there any [engineering](jobrole) jobs?
 * information_request/available_jobs
 
-< what city do you live in?
+< Tell me which city you live in and I will try and find [engineering](jobrole) jobs near you?
 * prompt/specify_city
 
 I live in [london](city)

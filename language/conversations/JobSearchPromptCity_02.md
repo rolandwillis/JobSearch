@@ -12,7 +12,7 @@ Hi
 I am looking for [engineering](jobrole) jobs.
 * information_request/available_jobs
 
-< Where do you live?
+< Tell me which city you live in and I will try and find [engineering](jobrole) jobs near you?
 * prompt/specify_city
 
 I live in [London](city)
