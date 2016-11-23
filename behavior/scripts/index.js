@@ -20,7 +20,7 @@ const collectCity = client.createStep({
   },
 
   extractInfo() {
-
+	console.log('trying to get information about the job role.')
 	const jobrole = firstOfEntityRole(client.getMessagePart(), 'jobrole') 
 
 	  if (jobrole) {
