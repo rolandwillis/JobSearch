@@ -25,7 +25,8 @@ const collectCity = client.createStep({
 
 	  if (jobrole) {
       client.updateConversationState({
-        jobRole: jobrole
+        jobRole: jobrole,
+		byeSent:false
       })
     console.log('User wants to search for the job role inside collectCity :', jobrole.value)
 	}
@@ -35,7 +36,8 @@ const collectCity = client.createStep({
 
     if (city) {
       client.updateConversationState({
-        jobCity: city
+        jobCity: city,
+		byeSent:false
       })
 
      console.log('User wants to search for the job role ' + jobrole.value + ' near the city :', city.value)
@@ -63,7 +65,8 @@ const collectJobRole = client.createStep({
 
 	  if (jobrole) {
       client.updateConversationState({
-        jobRole: jobrole
+        jobRole: jobrole,
+		byeSent:false
       })
     console.log('User wants to search for the job role inside collectCity :', jobrole.value)
 	}
@@ -92,10 +95,12 @@ let jobLinkMessage = {
 		jobboardlink: "blah",
 		jobcount:"3",
 		city:client.getConversationState().jobCity.value,
+		byeSent:false
       }
  client.addResponse('information_response/available_jobs', jobLinkMessage)
    client.updateConversationState({
-        jobLinkSent: true
+        jobLinkSent: true,
+		byeSent:false
       })
     client.done()
   }
@@ -125,7 +130,7 @@ const establishJobType = client.createStep({
 
 const sayGoodbye = client.createStep({
   satisfied() {
-      return false;
+    return Boolean(client.getConversationState().byeSent)
     },
 
     prompt() {
@@ -134,7 +139,8 @@ const sayGoodbye = client.createStep({
  client.updateConversationState({
         jobLinkSent: false,
 		jobRole:null,
-		jobCity:null
+		jobCity:null,
+		byeSent:true
       })
       client.done()
   }
