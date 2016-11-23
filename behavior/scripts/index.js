@@ -86,7 +86,7 @@ const collectJobRole = client.createStep({
 const provideJobSearchLink = client.createStep({
   satisfied() {
 
-     return false,
+     return false
   },
 	  prompt() {
     // Need to provide job search link
@@ -125,7 +125,7 @@ const establishJobType = client.createStep({
 
 const sayGoodbye = client.createStep({
   satisfied() {
-    return false;
+    return false
     },
 
     prompt() {
