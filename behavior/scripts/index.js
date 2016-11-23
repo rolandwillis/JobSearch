@@ -150,17 +150,17 @@ const sayGoodbye = client.createStep({
   client.runFlow({
     classifications: {
       // map inbound message classifications to names of streams
-     /* 'greeting':'hi',
+      'greeting':'hi',
    	  'information_request/available_jobs': 'getCity',
 	  'information_response/available_jobs':'getJobSearchLink'
-	 */
+	 
     },
     autoResponses: {
       // configure responses to be automatically sent as predicted by the machine learning model
     },
     streams: {
       main: 'hi',
-	  hi:[establishJobType,collectCity,provideJobSearchLink,sayGoodbye],
+	  hi:[establishJobType,collectCity,provideJobSearchLink],
 	  end:[sayGoodbye]
     },
   })
