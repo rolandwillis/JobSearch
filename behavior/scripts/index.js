@@ -73,17 +73,23 @@ let jobLinkMessage = {
   }
 })
 
-const sayHello = client.createStep({
+const establishJobType = client.createStep({
   satisfied() {
-      return Boolean(client.getConversationState().helloSent)
+      return Boolean(client.getConversationState().jobType)
     },
+	extractInfo(){
 
+ const jobtype = firstOfEntityRole(client.getMessagePart(), 'jobtype')
+if(jobtype)      
+client.updateConversationState({
+        jobType: jobtype
+      })
+  console.log('User specifies interest in jobs of type:', jobtype.value)
+}
+},
     prompt() {
       client.addResponse('prompt/specify_jobtype')
-     
-      client.updateConversationState({
-        helloSent: true
-      })
+    
       client.done()
   }
 })
