@@ -25,7 +25,8 @@ const collectCity = client.createStep({
 
 	  if (jobrole) {
       client.updateConversationState({
-        jobRole: jobrole
+        jobRole: jobrole,
+		byeSent:false
       })
     console.log('User wants to search for the job role inside collectCity :', jobrole.value)
 	}
@@ -35,7 +36,8 @@ const collectCity = client.createStep({
 
     if (city) {
       client.updateConversationState({
-        jobCity: city
+        jobCity: city,
+		byeSent:false
       })
 
      console.log('User wants to search for the job role ' + jobrole.value + ' near the city :', city.value)
@@ -63,7 +65,8 @@ const collectJobRole = client.createStep({
 
 	  if (jobrole) {
       client.updateConversationState({
-        jobRole: jobrole
+        jobRole: jobrole,
+		byeSent:false
       })
     console.log('User wants to search for the job role inside collectCity :', jobrole.value)
 	}
@@ -83,7 +86,7 @@ const collectJobRole = client.createStep({
 const provideJobSearchLink = client.createStep({
   satisfied() {
 
-     return false;
+     return Boolean(client.getConversationState().jobLinkSent)
   },
 	  prompt() {
     // Need to provide job search link
@@ -91,11 +94,13 @@ let jobLinkMessage = {
         jobrole: client.getConversationState().jobRole.value,
 		jobboardlink: "blah",
 		jobcount:"3",
-		city:client.getConversationState().jobCity.value
+		city:client.getConversationState().jobCity.value,
+		byeSent:false
       }
  client.addResponse('information_response/available_jobs', jobLinkMessage)
    client.updateConversationState({
-        jobLinkSent: true
+        jobLinkSent: true,
+		byeSent:false
       })
     client.done()
   }
@@ -131,6 +136,12 @@ const sayGoodbye = client.createStep({
     prompt() {
       client.addResponse('thanks')
 // Reset all satisfied conditions
+ client.updateConversationState({
+        jobLinkSent: false,
+		jobRole:null,
+		jobCity:null,
+		byeSent:true
+      })
       client.done()
   }
 })
@@ -139,7 +150,9 @@ const sayGoodbye = client.createStep({
   client.runFlow({
     classifications: {
       // map inbound message classifications to names of streams
-      'greeting':'hi'
+      'greeting':'hi',
+   	  'information_request/available_jobs': 'getCity',
+	  'information_response/available_jobs':'getJobSearchLink'
 	 
     },
     autoResponses: {
