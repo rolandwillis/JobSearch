@@ -84,6 +84,18 @@ const sayHello = client.createStep({
   }
 })
 
+const sayGoodbye = client.createStep({
+  satisfied() {
+      return false;
+    },
+
+    prompt() {
+      client.addResponse('thanks')
+      client.done()
+  }
+})
+
+
   client.runFlow({
     classifications: {
       // map inbound message classifications to names of streams
@@ -97,6 +109,7 @@ const sayHello = client.createStep({
       main: 'hi',
 	  hi:[sayHello],
 	  getJobSearch:[collectCity,provideJobSearchLink],
+	  end:[sayGoodbye]
     },
   })
 }
