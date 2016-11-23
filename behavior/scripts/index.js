@@ -148,7 +148,7 @@ const sayGoodbye = client.createStep({
     },
     streams: {
       main: 'hi',
-	  hi:[establishJobType,collectJobRole,collectCity,provideJobSearchLink],
+	  hi:[establishJobType,collectCity,provideJobSearchLink],
 	  end:[sayGoodbye]
     },
   })
