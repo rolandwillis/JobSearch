@@ -18,7 +18,7 @@ I am really looking for [c# senior development](jobrole) roles.
 I am based in [Liverpool](city)
 * response/specify_city
 
-< Thanks. I have found [8](jobcount) [c# senior development](jobrole) roles near [Liverpool](city). Click [here](jobboardlink) to have a look.
+< Thanks. I have found [8](jobcount) [c# senior development](jobrole) roles near [Liverpool](city). Visit [http://google.co.uk](jobboardlink) to have a look.
 * information_response/available_jobs
 
 Goodbye

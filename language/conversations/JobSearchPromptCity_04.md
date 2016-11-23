@@ -12,7 +12,7 @@ Do you have any [c# developer](jobrole) jobs?
 I live in [london](city)
 * response/specify_city
 
-< Ok, I had a look and I have found [4](jobcount) [c# developer](jobrole) jobs in and around [london](city). Click [here](jobboardlink) to have a look.
+< Ok, I had a look and I have found [4](jobcount) [c# developer](jobrole) jobs in and around [london](city). Visit [http://google.co.uk](jobboardlink) to have a look.
 * information_response/available_jobs
 
 Thanks, that's great.

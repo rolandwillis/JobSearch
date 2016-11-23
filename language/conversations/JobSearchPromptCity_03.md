@@ -12,7 +12,7 @@ are there any [engineering](jobrole) jobs please?
 sure I live in [London](city)
 * response/specify_city
 
-< That's great! I have found [4](jobcount) [engineering](jobrole) jobs near [London](city). Click [here](jobboardlink) to see.
+< That's great! I have found [4](jobcount) [engineering](jobrole) jobs near [London](city). Visit [http://google.co.uk](jobboardlink) to see.
 * information_response/available_jobs
 
 thanks

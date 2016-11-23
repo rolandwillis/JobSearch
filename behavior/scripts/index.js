@@ -92,7 +92,7 @@ const provideJobSearchLink = client.createStep({
     // Need to provide job search link
 let jobLinkMessage = {
         jobrole: client.getConversationState().jobRole.value,
-		jobboardlink: "blah",
+		jobboardlink: "http://google.co.uk",
 		jobcount:"3",
 		city:client.getConversationState().jobCity.value
       }
@@ -150,6 +150,7 @@ const sayGoodbye = client.createStep({
       // map inbound message classifications to names of streams
     //  'greeting':'hi',
 	//  'information_response/available_jobs':'getJobSearchLink'
+	'goodbye':'end'
 	 
     },
     autoResponses: {
